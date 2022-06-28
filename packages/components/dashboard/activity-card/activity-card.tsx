@@ -17,7 +17,7 @@ import { eventsResource } from '../../resources';
 import './activity-card.scss';
 
 const OngoingActivity: React.FC = () => {
-  const [progress, progressError, progressLoading] = useCustomPrometheusPoll({
+  const [progress, , progressLoading] = useCustomPrometheusPoll({
     query: dataResiliencyQueryMap.MCG_REBUILD_PROGRESS_QUERY,
     endpoint: 'api/v1/query' as any,
     basePath: MCG_MS_PROMETHEUS_URL,
@@ -42,7 +42,7 @@ const OngoingActivity: React.FC = () => {
 
   return (
     <OngoingActivityBody
-      loaded={progressLoading || progressError}
+      loaded={!progressLoading}
       prometheusActivities={prometheusActivities}
     />
   );
